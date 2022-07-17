@@ -1,0 +1,6 @@
+.photo-card__like_active {
+    background: url("../../../../images/photo-card-like-active.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+}

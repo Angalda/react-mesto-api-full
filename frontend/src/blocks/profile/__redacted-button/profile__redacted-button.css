@@ -1,0 +1,23 @@
+.profile__redacted-button {
+    padding: 0;
+    margin: 0 0 0 18px;
+    width: 24px;
+    height: 24px;
+    background: url("../../../images/profile-redacted.svg");
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+}
+
+.profile__redacted-button:hover {
+    opacity: 0.6;
+    transition: opacity .3s;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__redacted-button {
+        margin: 0 0 0 10px;
+        width: 18px;
+        height: 18px;
+    }
+}

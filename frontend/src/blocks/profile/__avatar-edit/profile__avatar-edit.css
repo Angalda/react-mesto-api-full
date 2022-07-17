@@ -1,0 +1,12 @@
+.profile__avatar-edit {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-color:rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+}

@@ -1,0 +1,8 @@
+.pop-up__span-error {
+    padding: 0;
+    margin: 0;
+    display: block;
+    position: relative;
+    top: -15px;
+    height: 15px;
+}

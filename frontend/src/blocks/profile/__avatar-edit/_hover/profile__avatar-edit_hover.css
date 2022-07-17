@@ -1,0 +1,4 @@
+.profile__avatar-edit_hover {
+    opacity: 1;
+    transition: opacity .3s;
+}
