@@ -1,3 +1,5 @@
+
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -11,11 +13,11 @@ class Api {
     }
     return res.json();
   }
-
   //Получаем с сервера информацию о пользователе
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse)
   }
@@ -23,7 +25,8 @@ class Api {
   //Загрузка данных для карточек с сервера
   getCardInfo() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse)
   }
@@ -36,7 +39,8 @@ class Api {
       body: JSON.stringify({
         name: name,
         about: about
-      })
+      }),
+      credentials: 'include',
     })
       .then(this._checkResponse)
   }
@@ -46,6 +50,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         link: link
@@ -58,7 +63,8 @@ class Api {
   deleteCard(idCard) {
     return fetch(`${this._baseUrl}/cards/${idCard}`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse)
   }
@@ -67,7 +73,8 @@ class Api {
   addLike(idCard, likes) {
     return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
       method: 'PUT',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse)
   }
@@ -75,7 +82,8 @@ class Api {
   removeLike(idCard, likes) {
     return fetch(`${this._baseUrl}/cards/${idCard}/likes`, {
       method: 'DELETE',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse)
   }
@@ -92,6 +100,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -102,9 +111,20 @@ class Api {
 }
 
 export const api = new Api({
+  baseUrl: 'http://localhost:3001',
+  headers: {
+    'authorization': `Bearer ${localStorage.getItem('jwt')}`,
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include',
+});
+
+/* 
+export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',
   headers: {
     authorization: '2ee8c513-1056-4e42-b03f-51f9bdfbc616',
     'Content-Type': 'application/json'
   }
 })
+ */

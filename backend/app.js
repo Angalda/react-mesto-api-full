@@ -1,16 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { errors } = require('celebrate');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
-const app = express();
-
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { validationCreateUser, validationLogin } = require('./middlewares/validation');
+
+const { PORT = 3001 } = process.env;
+const app = express();
+
+const options = {
+  origin: [
+    'http://localhost:3000',
+  ],
+  credentials: true,
+};
+
+app.use('*', cors(options));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -5,7 +5,9 @@ import logo from '../images/header-logo.svg';
 function Header(props) {
   return (
     <header className="header">
-      <a href={logo} className="header__logo"></a>
+      <a href="/">
+        <img className="header__logo" src={logo} alt="logo"/>
+      </a>
       <Switch>
         <Route exact path="/sign-in">
           <Link to="/sign-up" className="header__link">Регистрация</Link>
