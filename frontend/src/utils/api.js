@@ -38,7 +38,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: name,
-        about: about
+        about: about 
       }),
       credentials: 'include',
     })
@@ -46,15 +46,16 @@ class Api {
   }
 
   //Добавление данных новой карточки на сервер !!!
-  postCardInfo({ name, link }) {
+  postCardInfo(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
-      credentials: 'include',
+      //credentials: 'include',
       body: JSON.stringify({
-        name: name,
-        link: link
-      })
+       link: data.link, 
+       name: data.name,
+       
+    })
     })
       .then(this._checkResponse)
   }
@@ -111,7 +112,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3001',
+  baseUrl: `${window.location.protocol}${process.env.REACT_APP_API_URL || '//localhost:3001'}`,
   headers: {
     'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',

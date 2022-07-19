@@ -37,8 +37,6 @@ function App() {
                 .then(
                     ([userData, cardList]) => {
                         setCurrentUser(userData.data);
-                        console.log(userData.data);
-                        console.log(cardList.data);
                         setCards(cardList.data);
                     })
                 .catch((err) => console.log(err))
@@ -52,7 +50,7 @@ function App() {
 
         // Отправляем запрос в API и получаем обновлённые данные карточки
         api.changeStatusLike(card._id, !isLiked).then((newCard) => {
-            setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+            setCards((state) => state.map((c) => (c._id === card._id ? newCard.data : c)));
         })
             .catch((err) => console.log(err))
     }
@@ -102,7 +100,7 @@ function App() {
     function handleUpdateUser(info) {
         api.postUserInfo(info)
             .then((res) => {
-                setCurrentUser(res);
+                setCurrentUser(res.data);
                 handleClosePopup();
             })
             .catch((err) => console.log(err))
@@ -111,16 +109,17 @@ function App() {
     function handleUpdateAvatar(obj) {
         api.changeAvatar(obj)
             .then((res) => {
-                setCurrentUser(res);
+                setCurrentUser(res.data);
                 handleClosePopup();
             })
             .catch((err) => console.log(err))
     }
 
-    function handleAddPlaceSubmit(obj) {
-        api.postCardInfo(obj)
+    function handleAddPlaceSubmit(data) {
+        console.log(data)
+        api.postCardInfo(data)
             .then((newCard) => {
-                setCards([newCard, ...cards]);
+                setCards([newCard.data, ...cards]);
                 handleClosePopup();
             })
             .catch((err) => console.log(err))
@@ -145,9 +144,9 @@ function App() {
         return auth.login(password, email)
             .then((res) => {
                 localStorage.setItem("jwt", res.token);
-                setIsLoggedIn(true);
                 setEmail(email);
-                history.push("/");
+                history.push("/main");
+                setIsLoggedIn(true);
             })
             .catch((err) => {
                 if (err.status === 400) {
@@ -160,8 +159,8 @@ function App() {
 
     function handleGetOut() {
         localStorage.removeItem("jwt");
-        setIsLoggedIn(false);
         history.push("/sign-in");
+        setIsLoggedIn(false);
     }
 
     useEffect(() => {
