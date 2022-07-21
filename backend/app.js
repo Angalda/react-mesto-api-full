@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -16,6 +17,10 @@ const app = express();
 const options = {
   origin: [
     'http://localhost:3000',
+    'http://mesto.angalda.nomoredomains.xyz',
+    'https://mesto.angalda.nomoredomains.xyz',
+    'http://api.mesto.angalda.nomoredomains.xyz',
+    'https://api.mesto.angalda.nomoredomains.xyz',
   ],
   credentials: true,
 };
@@ -35,7 +40,7 @@ app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
-}); 
+});
 
 app.post('/signin', validationLogin, login);
 app.post('/signup', validationCreateUser, createUser);
