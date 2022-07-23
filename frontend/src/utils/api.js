@@ -112,7 +112,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: `${'https://api.mesto.angalda.nomoredomains.xyz/sign-in' || '//localhost:3001' }`,
+  baseUrl: `${'https://api.mesto.angalda.nomoredomains.xyz' || '//localhost:3001' }`,
   headers: {
     'authorization': `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json',
