@@ -1,4 +1,4 @@
-export const BASE_URL = `${'https://api.mesto.angalda.nomoredomains.xyz' || '//localhost:3001' }`;
+export const BASE_URL = `${'https://api.mesto.angalda.nomoredomains.xyz' || 'http://api.mesto.angalda.nomoredomains.xyz' || '//localhost:3001' }`;
 
 function checkRes(res) {
   if (res.ok) {
